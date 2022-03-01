@@ -1,0 +1,36 @@
+Nume: Popescu
+Prenume: Raluca-Elena
+Grupa: 333CA
+
+
+Cu ajutorul unui switch, am impartit programul in 4 posibilitati: cei trei
+coordonatori si workerii.
+
+Coordonatorii isi citesc workerii din fisierele de intrare si le transmit 
+acestora rank-ul lor prin intermediul functiilor create_workers si 
+send_coordonator_rank. Mai departe, fiecare coordonator le va trimite celorlalti
+doi coordonatori array-ul cu workerii proprii. Acest lucru se realizeaza prin
+functia send_info_to_coordonators. Informatiile obtinute de fiecare prin functia
+recv_info_from_coordonators sunt trimise mai departe fiecarui worker de catre 
+coordonatorul sau cu ajutorul functiei send_info_to_workers. Workerii primesc
+informatiile in functia workers_recv_info_from_coordonators si toate procesele
+vor afisa topologia apelandu-se functia print_topology.
+
+Dupa obtinerea topologiei de catre toate procesele, cordonatorul 0 citeste
+argumentul din linia de comanda cu dimensiunea array-ului ce trebuie creat.
+Dupa ce array-ul este realizat asa cum este scris in enuntul temei, functia
+send_array_chunck_to_coordonators va imparti acest array in bucati pentru a fi 
+trimis catre ceilalti doi coordonatori. La randul lor, fiecare coordonator isi 
+va imparti bucata din array si va trimite fiecarui worker o bucata mai mica.
+In functia workers_recv_array_chunck_from_coordonators, workerii primesc bucata
+din array, o modifica conform enuntului temei si o trimit inapoi coordonatorilor
+lor. Fiecare coordonator isi reasambleaza portiunea din array, iar coordonatorii
+1 si 2 ii vor trimite coordonatorului 0 acea portiune. 
+
+La final, coordonatorul 0 primeste fiecare bucata din array si printeaza
+rezultatul final.
+
+Pentru situatia in care canalul de comunicatie dintre procesele 0 si 1 este
+stricat, programul functioneaza pe aceeasi idee, dar datele trimise in mod normal
+intre procesele 0 si 1 au ca stare intermediara procesul 2.
+
